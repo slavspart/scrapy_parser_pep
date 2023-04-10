@@ -5,6 +5,7 @@ from pep_parse.items import PepParseItem
 
 
 class PepSpider(scrapy.Spider):
+    STATUS_SELECTOR = '//dt[contains(., "Status")]/following::dd/abbr/text()'
     name = "pep"
     allowed_domains = ["peps.python.org"]
     start_urls = ['https://peps.python.org/', ]
@@ -33,8 +34,6 @@ class PepSpider(scrapy.Spider):
         data = {
             'number': response.meta.get('number'),
             'name': response.meta.get('name'),
-            'status': response.xpath(
-                '//dt[contains(., "Status")]/following::dd/abbr/text()'
-            )[0].get()
+            'status': response.xpath(self.STATUS_SELECTOR)[0].get()
         }
         yield PepParseItem(data)

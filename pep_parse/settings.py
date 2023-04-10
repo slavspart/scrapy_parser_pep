@@ -30,3 +30,4 @@ ITEM_PIPELINES = {
 LOG_FILE = 'file.log'
 
 BASE_DIR = Path(__file__).parent.parent
+DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
